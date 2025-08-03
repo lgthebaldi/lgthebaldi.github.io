@@ -214,3 +214,43 @@ body {
 body.dark-mode .social-links a:hover {
     color: #8ab4f8; /* Um azul ainda mais claro para o hover no modo escuro */
 }
+
+
+/* ======================== */
+/* ESTILOS RESPONSIVOS      */
+/* ======================== */
+
+@media (max-width: 768px) {
+
+    /* Ajusta o espaçamento do topo para o header, em vez do body,
+       para evitar problemas em algumas visualizações */
+    body {
+        padding-top: 0; 
+    }
+    header {
+        margin-top: 60px; /* Garante que o header comece abaixo da navbar fixa */
+    }
+
+    h1 {
+        font-size: 2em; /* Diminui um pouco o título principal */
+    }
+
+    /* Diminui a foto em telas menores */
+    header img {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Ajusta o padding dos links do menu para caberem melhor */
+    .navbar a {
+        padding: 14px 12px;
+        font-size: 15px;
+    }
+
+    /* Garante que o conteúdo principal e o formulário não fiquem
+       colados nas bordas da tela */
+    main, #contato form {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
