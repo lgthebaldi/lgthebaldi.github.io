@@ -254,3 +254,64 @@ body.dark-mode .social-links a:hover {
         padding-right: 15px;
     }
 }
+
+
+/* ======================== */
+/* ESTILOS DA GALERIA DE PROJETOS */
+/* ======================== */
+
+.project-gallery {
+    display: flex; /* ATIVA O FLEXBOX! */
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+    justify-content: center; /* Centraliza os cards no container */
+    gap: 20px; /* Cria um espaço de 20px entre os cards */
+    margin-top: 20px;
+}
+
+.project-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 300px; /* Define uma largura fixa para cada card */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px); /* Efeito de 'elevar' o card */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.project-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.project-card h3 {
+    margin-top: 0;
+}
+
+.project-card a {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #007BFF;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.project-card a:hover {
+    background-color: #0056b3;
+}
+
+/* Ajustes para o modo escuro */
+body.dark-mode .project-card {
+    background-color: #2a2a2a;
+    border-color: #444;
+}
