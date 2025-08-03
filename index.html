@@ -29,11 +29,28 @@
         </main>
 
         <section class="social-links" id="contato">
-            <h2>Redes Sociais</h2>
+            <h2>Contato</h2>
             <ul>
                 <li><a href="https://www.linkedin.com/in/seu-usuario" target="_blank">LinkedIn</a></li>
                 <li><a href="https://github.com/lgthebaldi" target="_blank">GitHub</a></li>
                 </ul>
+
+        <form>
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seu.email@exemplo.com" required>
+            </div>
+            <div class="form-group">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" rows="5" placeholder="Deixe sua mensagem aqui..." required></textarea>
+            </div>
+            <button type="submit">Enviar Mensagem</button>
+        </form>
+        
         </section>
 
         <section class="projects" id="projetos">

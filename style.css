@@ -122,3 +122,49 @@ body.dark-mode a {
 body {
     padding-top: 50px; /* Adiciona um espaço no topo do body do tamanho da nossa navbar */
 }
+
+/* ======================== */
+/* ESTILOS DO FORMULÁRIO    */
+/* ======================== */
+
+#contato form {
+    display: flex; /* Usa flexbox para alinhar os itens */
+    flex-direction: column; /* Coloca os itens um embaixo do outro */
+    max-width: 600px; /* Limita a largura do formulário */
+    width: 100%; /* Garante que ele ocupe o espaço disponível até o máximo */
+    margin: 20px auto; /* Centraliza o formulário */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espaçamento entre os grupos de campos */
+    text-align: left; /* Alinha o texto das labels à esquerda */
+}
+
+#contato label {
+    display: block; /* Faz a label ocupar uma linha inteira */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#contato input,
+#contato textarea {
+    width: 100%; /* Ocupa toda a largura do container */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: inherit; /* Herda a fonte do 'body' */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+}
+
+/* Estilizando o botão de submit especificamente */
+#contato button[type="submit"] {
+    width: auto; /* Largura automática baseada no texto */
+    align-self: flex-end; /* Alinha o botão à direita */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#contato button[type="submit"]:hover {
+    background-color: #0056b3; /* Um azul um pouco mais escuro no hover */
+}
