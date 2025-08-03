@@ -77,3 +77,48 @@ body.dark-mode button {
 body.dark-mode a {
     color: #58a6ff; /* Um azul mais claro para o modo escuro */
 }
+
+/* ================== */
+/* ESTILOS DA NAVBAR  */
+/* ================== */
+
+.navbar {
+    position: fixed; /* A mágica para fixar no topo */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa toda a largura */
+    background-color: #333; /* Uma cor de fundo escura */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Uma sombra sutil */
+    z-index: 1000; /* Garante que a navbar fique acima de outros elementos */
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo da navbar */
+}
+
+.navbar ul {
+    list-style-type: none; /* Remove as bolinhas da lista */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline-block; /* Coloca os itens lado a lado */
+}
+
+.navbar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none; /* Remove o sublinhado do link */
+    transition: background-color 0.3s; /* Animação suave no hover */
+}
+
+/* Efeito ao passar o mouse */
+.navbar a:hover {
+    background-color: #555;
+}
+
+/* ATENÇÃO: Adicione isso para o conteúdo principal não ficar escondido atrás da navbar */
+body {
+    padding-top: 50px; /* Adiciona um espaço no topo do body do tamanho da nossa navbar */
+}
