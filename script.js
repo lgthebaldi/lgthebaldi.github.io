@@ -41,4 +41,78 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+// ===================================================
+    // NOSSO NOVO CÓDIGO PARA VALIDAÇÃO DO FORMULÁRIO
+    // ===================================================
+
+    // 1. Seleciona os elementos do formulário
+    const contactForm = document.getElementById('contact-form');
+    const nomeInput = document.getElementById('nome');
+    const emailInput = document.getElementById('email');
+    const mensagemInput = document.getElementById('mensagem');
+    const successMessage = document.getElementById('success-message');
+
+    // 2. Adiciona um "espião" para o evento de 'submit' do formulário
+    contactForm.addEventListener('submit', function(event) {
+        // 3. Impede o comportamento padrão de recarregar a página
+        event.preventDefault();
+
+        // Limpa mensagens de erro e sucesso antigas
+        clearErrors();
+        successMessage.style.display = 'none';
+
+        let isValid = true; // Começamos assumindo que o formulário é válido
+
+        // 4. Validação do campo Nome
+        if (nomeInput.value.trim() === '') {
+            showError(nomeInput, 'O campo nome é obrigatório.');
+            isValid = false;
+        }
+
+        // 5. Validação do campo E-mail
+        if (emailInput.value.trim() === '') {
+            showError(emailInput, 'O campo e-mail é obrigatório.');
+            isValid = false;
+        } else if (!isValidEmail(emailInput.value)) {
+            showError(emailInput, 'Por favor, insira um e-mail válido.');
+            isValid = false;
+        }
+
+        // 6. Validação do campo Mensagem
+        if (mensagemInput.value.trim() === '') {
+            showError(mensagemInput, 'O campo mensagem é obrigatório.');
+            isValid = false;
+        }
+
+        // 7. Se tudo for válido, mostra a mensagem de sucesso
+        if (isValid) {
+            successMessage.textContent = 'Mensagem enviada com sucesso! (Simulação)';
+            successMessage.style.display = 'block';
+            contactForm.reset(); // Limpa o formulário
+        }
+    });
+
+    // Função para mostrar a mensagem de erro
+    function showError(inputElement, message) {
+        const errorMessageElement = inputElement.nextElementSibling; // Pega o <p> logo após o input
+        errorMessageElement.textContent = message;
+        errorMessageElement.style.display = 'block';
+    }
+
+    // Função para limpar todas as mensagens de erro
+    function clearErrors() {
+        const errorMessages = document.querySelectorAll('.error-message');
+        errorMessages.forEach(msg => {
+            msg.textContent = '';
+            msg.style.display = 'none';
+        });
+    }
+
+    // Função para verificar se o e-mail tem um formato válido
+    function isValidEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+
+
 });

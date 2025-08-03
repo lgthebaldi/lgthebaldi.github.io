@@ -168,3 +168,21 @@ body {
 #contato button[type="submit"]:hover {
     background-color: #0056b3; /* Um azul um pouco mais escuro no hover */
 }
+
+/* ================================= */
+/* ESTILOS DAS MENSAGENS DO FORM     */
+/* ================================= */
+
+.error-message {
+    color: #e74c3c; /* Um tom de vermelho */
+    font-size: 14px;
+    margin-top: 5px;
+    display: none; /* Começa escondida por padrão */
+}
+
+#success-message {
+    color: #2ecc71; /* Um tom de verde */
+    font-weight: bold;
+    margin-top: 15px;
+    display: none; /* Também começa escondida */
+}
