@@ -162,11 +162,12 @@ body {
     width: auto; /* Largura automática baseada no texto */
     align-self: flex-end; /* Alinha o botão à direita */
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #contato button[type="submit"]:hover {
-    background-color: #0056b3; /* Um azul um pouco mais escuro no hover */
+    background-color: #0056b3;
+    transform: scale(1.05); /* Faz o botão crescer 5% */
 }
 
 /* ================================= */
@@ -185,4 +186,31 @@ body {
     font-weight: bold;
     margin-top: 15px;
     display: none; /* Também começa escondida */
+}
+
+
+/* ======================== */
+/* ESTILOS DOS LINKS SOCIAIS */
+/* ======================== */
+
+/* A regra geral para os links dentro da seção social-links */
+.social-links a {
+    font-size: 18px; /* Um pouco maior para destaque */
+    font-weight: bold;
+    /* Adicionamos a transição para animar as mudanças */
+    transition: transform 0.2s ease, color 0.3s ease;
+}
+
+/* A regra para quando o mouse estiver sobre os links */
+.social-links a:hover {
+    /* Move o link 3 pixels para cima, criando um efeito de 'saltar' */
+    transform: translateY(-3px); 
+    
+    /* Podemos usar uma cor mais escura do tema para o hover */
+    color: #0056b3; 
+}
+
+/* Ajuste para o modo escuro, se quiser */
+body.dark-mode .social-links a:hover {
+    color: #8ab4f8; /* Um azul ainda mais claro para o hover no modo escuro */
 }
