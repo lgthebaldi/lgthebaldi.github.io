@@ -114,5 +114,66 @@ document.addEventListener('DOMContentLoaded', () => {
         return regex.test(email);
     }
 
+    // ===================================================
+    // CÓDIGO PARA BUSCAR PROJETOS DA API DO GITHUB
+    // ===================================================
+
+    // Função assíncrona para buscar os projetos
+    async function fetchGitHubProjects() {
+        // 1. Define o usuário e a URL da API
+        const username = 'lgthebaldi';
+        const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc`;
+        
+        // 2. Seleciona o container onde os cards serão inseridos
+        const galleryContainer = document.querySelector('#projetos .project-gallery');
+
+        try {
+            // 3. Faz a requisição à API usando fetch e espera a resposta
+            const response = await fetch(apiUrl);
+            // Converte a resposta para o formato JSON
+            const projects = await response.json();
+
+            // 4. Limpa a mensagem "Carregando..."
+            galleryContainer.innerHTML = ''; 
+
+            // 5. Para cada projeto retornado, cria um card
+            projects.forEach(project => {
+                // Cria o elemento do card
+                const card = document.createElement('div');
+                card.className = 'project-card'; // Usa a mesma classe CSS que já criamos
+
+                // Cria o título
+                const title = document.createElement('h3');
+                title.textContent = project.name;
+
+                // Cria a descrição (só se ela existir)
+                const description = document.createElement('p');
+                description.textContent = project.description || 'Sem descrição disponível.'; // Usa um texto padrão se não houver descrição
+
+                // Cria o link para o repositório
+                const link = document.createElement('a');
+                link.href = project.html_url;
+                link.textContent = 'Ver no GitHub';
+                link.target = '_blank'; // Abre o link em uma nova aba
+
+                // 6. Adiciona os elementos (título, descrição, link) dentro do card
+                card.appendChild(title);
+                card.appendChild(description);
+                card.appendChild(link);
+
+                // 7. Adiciona o card completo à galeria na página
+                galleryContainer.appendChild(card);
+            });
+
+        } catch (error) {
+            // 8. Se der algum erro, mostra uma mensagem no container
+            galleryContainer.innerHTML = '<p>Não foi possível carregar os projetos. Tente novamente mais tarde.</p>';
+            console.error('Erro ao buscar projetos:', error);
+        }
+    }
+
+    // Chama a função para executar tudo assim que a página carregar
+    fetchGitHubProjects();
+
 
 });
