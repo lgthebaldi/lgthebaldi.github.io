@@ -118,59 +118,58 @@ document.addEventListener('DOMContentLoaded', () => {
     // CÓDIGO PARA BUSCAR PROJETOS DA API DO GITHUB
     // ===================================================
 
-    // Função assíncrona para buscar os projetos
-    async function fetchGitHubProjects() {
-        // 1. Define o usuário e a URL da API
-        const username = 'lgthebaldi';
-        const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc`;
-        
-        // 2. Seleciona o container onde os cards serão inseridos
-        const galleryContainer = document.querySelector('#projetos .project-gallery');
+            // Substitua sua função fetchGitHubProjects inteira por esta
+        async function fetchGitHubProjects() {
+            const username = 'lgthebaldi';
+            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc`;
+            const galleryContainer = document.querySelector('#projetos .project-gallery');
 
-        try {
-            // 3. Faz a requisição à API usando fetch e espera a resposta
-            const response = await fetch(apiUrl);
-            // Converte a resposta para o formato JSON
-            const projects = await response.json();
+            try {
+                const response = await fetch(apiUrl);
+                const projects = await response.json();
 
-            // 4. Limpa a mensagem "Carregando..."
-            galleryContainer.innerHTML = ''; 
+                galleryContainer.innerHTML = ''; 
 
-            // 5. Para cada projeto retornado, cria um card
-            projects.forEach(project => {
-                // Cria o elemento do card
-                const card = document.createElement('div');
-                card.className = 'project-card'; // Usa a mesma classe CSS que já criamos
+                projects.forEach(project => {
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
 
-                // Cria o título
-                const title = document.createElement('h3');
-                title.textContent = project.name;
+                    // --- NOVA LÓGICA DA IMAGEM ---
+                    const imageUrl = `https://raw.githubusercontent.com/${username}/${project.name}/main/cover.png`;
+                    const image = document.createElement('img');
+                    image.src = imageUrl; // Tenta carregar a imagem de capa do repositório
 
-                // Cria a descrição (só se ela existir)
-                const description = document.createElement('p');
-                description.textContent = project.description || 'Sem descrição disponível.'; // Usa um texto padrão se não houver descrição
+                    // Se a imagem de capa não for encontrada (der erro), usa a nossa imagem placeholder
+                    image.onerror = function() {
+                        this.src = 'assets/project-placeholder.png';
+                    };
+                    // --- FIM DA NOVA LÓGICA ---
+                    
+                    const title = document.createElement('h3');
+                    title.textContent = project.name;
 
-                // Cria o link para o repositório
-                const link = document.createElement('a');
-                link.href = project.html_url;
-                link.textContent = 'Ver no GitHub';
-                link.target = '_blank'; // Abre o link em uma nova aba
+                    const description = document.createElement('p');
+                    description.textContent = project.description || 'Sem descrição disponível.';
 
-                // 6. Adiciona os elementos (título, descrição, link) dentro do card
-                card.appendChild(title);
-                card.appendChild(description);
-                card.appendChild(link);
+                    const link = document.createElement('a');
+                    link.href = project.html_url;
+                    link.textContent = 'Ver no GitHub';
+                    link.target = '_blank';
 
-                // 7. Adiciona o card completo à galeria na página
-                galleryContainer.appendChild(card);
-            });
+                    // Adiciona os elementos na ordem correta
+                    card.appendChild(image); // Adiciona a imagem primeiro
+                    card.appendChild(title);
+                    card.appendChild(description);
+                    card.appendChild(link);
+                    
+                    galleryContainer.appendChild(card);
+                });
 
-        } catch (error) {
-            // 8. Se der algum erro, mostra uma mensagem no container
-            galleryContainer.innerHTML = '<p>Não foi possível carregar os projetos. Tente novamente mais tarde.</p>';
-            console.error('Erro ao buscar projetos:', error);
+            } catch (error) {
+                galleryContainer.innerHTML = '<p>Não foi possível carregar os projetos. Tente novamente mais tarde.</p>';
+                console.error('Erro ao buscar projetos:', error);
+            }
         }
-    }
 
     // Chama a função para executar tudo assim que a página carregar
     fetchGitHubProjects();
