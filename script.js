@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Se a imagem de capa não for encontrada (der erro), usa a nossa imagem placeholder
                     image.onerror = function() {
-                        this.src = 'assets/project-placeholder.png';
+                        this.src = 'assets/project-placeholder.jpg';
                     };
                     // --- FIM DA NOVA LÓGICA ---
                     
