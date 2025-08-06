@@ -286,7 +286,8 @@ body.dark-mode .social-links a:hover {
 
 .project-card img {
     width: 100%; /* Ocupa toda a largura do card */
-    object-fit: contain; /* Garante que a imagem inteira caiba, mantendo a proporção */
+    height: 180px; /* Define uma altura fixa para todas as imagens */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
     border-radius: 5px;
     margin-bottom: 15px;
 }
