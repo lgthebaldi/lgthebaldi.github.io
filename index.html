@@ -1,73 +1,108 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio | Luis Gustavo Thebaldi Barbosa</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luis Thebaldi | Dados e IA aplicados à produção</title>
+  <meta name="description" content="Estudante de Engenharia de Controle e Automação (Unicamp). Uso dados e IA para ganhar produtividade, com soluções simples de manter. Veja o agente que diagnostica atrasos de entregas.">
+  <meta name="theme-color" content="#fbf8f4">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Luis Thebaldi | Dados e IA aplicados à produção">
+  <meta property="og:description" content="Agente de IA que mostra onde as entregas atrasam, por que e o que fazer, com mapa de São Paulo e diagnóstico validado.">
+  <meta property="og:image" content="https://lgthebaldi.github.io/assets/cover-agente.png">
+  <meta property="og:url" content="https://lgthebaldi.github.io/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9B%B5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <ul>
-            <li><a href="#sobre">Sobre Mim</a></li>
-            <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#contato">Contato</a></li>
-        </ul>
-    </nav>
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="#topo">Luis Thebaldi</a>
+      <nav aria-label="Seções">
+        <a href="#projeto">Projeto</a>
+        <a href="#contato">Contato</a>
+        <button class="theme" id="tema" type="button" aria-label="Alternar entre tema claro e escuro">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
 
-    <header>
-        <img src="assets/foto-portifolio.jpg" alt="Foto de Luis Gustavo Thebaldi Barbosa">
-        <button id="theme-toggle">Mudar Tema</button>
-    </header>
+  <main id="topo">
 
-    <main>
-        <main id="sobre"></main>
-            <h1>Luis Gustavo Thebaldi Barbosa</h1>
-            <p>Sou um estudante de engenharia de controle e automação apaixonado por tecnologia, buscando oportunidades para aplicar meus conhecimentos em desenvolvimento de software e soluções inovadoras.</p>
-        </main>
+    <section class="hero wrap" aria-labelledby="nome">
+      <div class="hero-text">
+        <p class="eyebrow">Engenharia de Controle e Automação · Unicamp</p>
+        <h1 id="nome">Luis Gustavo<br>Thebaldi Barbosa</h1>
+        <p class="lead">Uso dados e IA para ganhar produtividade na produção, com soluções simples de manter. Estudante de engenharia e estagiário na indústria, buscando estágio em IA aplicada a operações.</p>
+        <div class="actions">
+          <a class="btn primary" href="#projeto">Ver projeto em destaque</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/luis-thebaldi" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn ghost" href="https://github.com/lgthebaldi" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <img class="foto" src="assets/foto-portifolio.jpg" width="593" height="798" alt="Foto de Luis Gustavo Thebaldi Barbosa">
+    </section>
 
-        <section class="social-links" id="contato">
-            <h2>Contato</h2>
-            <ul>
-                <li><a href="https://www.linkedin.com/in/luis-thebaldi" target="_blank">LinkedIn</a></li>
-                <li><a href="https://github.com/lgthebaldi" target="_blank">GitHub</a></li>
-                </ul>
+    <section class="wrap projeto" id="projeto" aria-labelledby="proj-titulo">
+      <p class="eyebrow">Projeto em destaque</p>
+      <article class="card">
+        <div class="media">
+          <picture>
+            <source media="(prefers-reduced-motion: reduce)" srcset="assets/cover-agente.png">
+            <img src="assets/demo-agente.gif" width="860" height="789" loading="lazy"
+                 alt="Demonstração do app: mapa de São Paulo com o filtro de 19h às 21h com chuva, onde a taxa de atraso sobe de 28% para 81%, e o diagnóstico escrito pela IA.">
+          </picture>
+        </div>
+        <div class="card-body">
+          <h2 id="proj-titulo">Agente de Análise de Atrasos em Entregas</h2>
+          <p>Um gestor de operações envia a base de entregas e vê <strong>onde os atrasos se concentram, por que acontecem e o que fazer</strong>. O app tem um mapa de São Paulo com filtros de hora, chuva e modal, e um diagnóstico escrito por IA.</p>
+          <ul class="chips" aria-label="Tecnologias">
+            <li>Python</li><li>pandas</li><li>Streamlit</li><li>pydeck</li><li>Gemini API</li>
+          </ul>
+          <div class="actions">
+            <a class="btn primary" href="https://agente-atrasos.streamlit.app/" target="_blank" rel="noopener">Abrir a demo</a>
+            <a class="btn ghost" href="https://github.com/lgthebaldi/agente-atrasos-entregas" target="_blank" rel="noopener">Ver o código</a>
+          </div>
+          <p class="nota">Os dados são fictícios.</p>
+        </div>
+      </article>
 
-        <form id="contact-form">
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo">
-                <p class="error-message"></p>
-            </div>
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="seu.email@exemplo.com">
-                <p class="error-message"></p>
-            </div>
-            <div class="form-group">
-                <label for="mensagem">Mensagem</label>
-                <textarea id="mensagem" name="mensagem" rows="5" placeholder="Deixe sua mensagem aqui..."></textarea>
-                <p class="error-message"></p>
-            </div>
-            <button type="submit">Enviar Mensagem</button>
-        </form>
-        <p id="success-message"></p>
+      <ol class="passos" aria-label="Como funciona">
+        <li>
+          <span class="num" aria-hidden="true">1</span>
+          <h3>O pandas calcula</h3>
+          <p>Todas as taxas e comparações saem do código, não do modelo de IA.</p>
+        </li>
+        <li>
+          <span class="num" aria-hidden="true">2</span>
+          <h3>A IA interpreta</h3>
+          <p>O Gemini recebe só o resumo e escreve o diagnóstico e as ações.</p>
+        </li>
+        <li>
+          <span class="num" aria-hidden="true">3</span>
+          <h3>Eu valido</h3>
+          <p>Padrões plantados numa base fictícia, uma base sem padrões e a conferência de cada número citado.</p>
+        </li>
+      </ol>
+    </section>
 
-        
-        </section>
+    <section class="wrap contato" id="contato" aria-labelledby="contato-titulo">
+      <h2 id="contato-titulo">Vamos conversar</h2>
+      <p>O jeito mais rápido de falar comigo é pelo LinkedIn.</p>
+      <div class="actions center">
+        <a class="btn primary" href="https://www.linkedin.com/in/luis-thebaldi" target="_blank" rel="noopener">Falar no LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/lgthebaldi" target="_blank" rel="noopener">Ver o GitHub</a>
+      </div>
+    </section>
 
-        <section class="projects fade-in-section" id="projetos">
-            <h2>Meus Projetos</h2>
+  </main>
 
-            <div class="project-gallery">
-                <p>Carregando projetos do GitHub...</p>
-            </div>
-        </section>
-    </main>
+  <footer class="rodape">
+    <div class="wrap"><p>© 2026 Luis Gustavo Thebaldi Barbosa</p></div>
+  </footer>
 
-    <script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>

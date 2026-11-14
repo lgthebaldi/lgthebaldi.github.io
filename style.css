@@ -1,318 +1,139 @@
-/* Estilos gerais e para o tema claro (padrão) */
+/* Tema claro por padrão; escuro pelo sistema ou pelo botão (data-theme) */
+:root {
+  --bg: #fbf8f4;
+  --surface: #ffffff;
+  --ink: #1c1917;
+  --muted: #57534e;
+  --line: #e7e0d8;
+  --accent: #c2410c;
+  --accent-ink: #ffffff;
+  --accent-soft: #ffedd5;
+  --shadow: 0 1px 2px rgba(28, 25, 23, .06), 0 12px 32px rgba(28, 25, 23, .08);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14110f; --surface: #1d1916; --ink: #f5f0ea; --muted: #b8aea3; --line: #2f2823;
+    --accent: #fb923c; --accent-ink: #1c1210; --accent-soft: #3a1f12;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14110f; --surface: #1d1916; --ink: #f5f0ea; --muted: #b8aea3; --line: #2f2823;
+  --accent: #fb923c; --accent-ink: #1c1210; --accent-soft: #3a1f12;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .35);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
 body {
-    font-family: Arial, sans-serif; /* Uma fonte padrão e segura */
-    background-color: #f4f4f4; /* Um cinza bem claro */
-    color: #333; /* Um cinza escuro para o texto */
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
-    transition: background-color 0.3s, color 0.3s; /* Animação suave na troca de tema */
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem; line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 700px) { .wrap { padding: 0 28px; } }
+
+/* Barra superior */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-in { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { font-weight: 700; text-decoration: none; letter-spacing: -.01em; }
+.topbar nav { display: flex; align-items: center; gap: 4px; }
+.topbar nav a {
+  text-decoration: none; color: var(--muted); font-size: .95rem; padding: 8px 12px; border-radius: 999px;
+}
+.topbar nav a:hover { color: var(--ink); background: color-mix(in srgb, var(--ink) 7%, transparent); }
+.theme {
+  display: grid; place-items: center; width: 38px; height: 38px; margin-left: 4px;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.theme:hover { border-color: var(--accent); color: var(--accent); }
+
+section[id] { scroll-margin-top: 76px; }
+
+/* Herói */
+.hero { display: grid; gap: 28px; padding-top: 40px; padding-bottom: 44px; align-items: center; }
+.hero .foto {
+  order: -1; width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-position: 50% 22%;
+  border: 5px solid var(--surface); box-shadow: var(--shadow);
+}
+.eyebrow {
+  margin: 0 0 10px; color: var(--accent); font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+}
+h1 { margin: 0 0 16px; font-size: clamp(2.1rem, 7vw, 3.4rem); line-height: 1.08; letter-spacing: -.03em; }
+.lead { margin: 0 0 24px; color: var(--muted); font-size: 1.12rem; max-width: 54ch; }
+@media (min-width: 800px) {
+  .hero { grid-template-columns: 1fr 280px; gap: 56px; padding-top: 72px; padding-bottom: 72px; }
+  .hero .foto { order: 0; width: 280px; height: 280px; justify-self: end; border-width: 8px; }
 }
 
-/* Container principal para centralizar o conteúdo */
-body, header, main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+/* Botões */
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.actions.center { justify-content: center; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 20px;
+  border-radius: 999px; font-weight: 600; font-size: .98rem; text-decoration: none; border: 1px solid transparent;
+  transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--ink)); }
+.btn.ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
+.btn.ghost:hover { border-color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
+
+/* Projeto */
+.projeto { padding-top: 24px; padding-bottom: 56px; }
+.card {
+  display: grid; background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+  box-shadow: var(--shadow); overflow: hidden;
+}
+.media { background: var(--accent-soft); padding: 16px; }
+.media img { border-radius: 12px; border: 1px solid var(--line); background: #fff; width: 100%; }
+.card-body { padding: 22px 20px 24px; }
+.card-body h2 { margin: 0 0 10px; font-size: 1.5rem; line-height: 1.2; letter-spacing: -.02em; }
+.card-body p { margin: 0 0 16px; color: var(--muted); }
+.card-body strong { color: var(--ink); }
+.card-body .nota { margin: 14px 0 0; font-size: .85rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0 0 20px; padding: 0; }
+.chips li {
+  padding: 4px 12px; border-radius: 999px; font-size: .82rem; font-weight: 600;
+  background: var(--accent-soft); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+}
+@media (min-width: 860px) {
+  .card { grid-template-columns: 1.05fr 1fr; }
+  .media { padding: 24px; display: grid; align-items: center; }
+  .card-body { padding: 36px 36px 36px 32px; align-self: center; }
+  .card-body h2 { font-size: 1.85rem; }
 }
 
-header img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%; /* Deixa a foto redonda */
-    border: 5px solid #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.passos { display: grid; gap: 14px; list-style: none; margin: 20px 0 0; padding: 0; }
+.passos li { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 20px; }
+.passos .num {
+  display: grid; place-items: center; width: 30px; height: 30px; margin-bottom: 10px; border-radius: 50%;
+  background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: .9rem;
 }
+.passos h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.passos p { margin: 0; color: var(--muted); font-size: .95rem; }
+@media (min-width: 760px) { .passos { grid-template-columns: repeat(3, 1fr); } }
 
-h1 {
-    margin-top: 20px;
-}
+/* Contato */
+.contato { text-align: center; padding-top: 24px; padding-bottom: 72px; }
+.contato h2 { margin: 0 0 6px; font-size: clamp(1.6rem, 4vw, 2.1rem); letter-spacing: -.02em; }
+.contato p { margin: 0 0 22px; color: var(--muted); }
 
-main {
-    max-width: 800px; /* Limita a largura do conteúdo para melhor leitura */
-}
-
-ul {
-    list-style-type: none; /* Remove as bolinhas da lista */
-    padding: 0;
-}
-
-ul li {
-    display: inline-block; /* Coloca os links lado a lado */
-    margin: 0 10px;
-}
-
-a {
-    text-decoration: none;
-    color: #007BFF; /* Um azul para os links */
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 15px;
-    border: none;
-    background-color: #007BFF;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer; /* Muda o cursor para uma mãozinha */
-}
-
-
-/* Estilos para o Tema Escuro */
-body.dark-mode { 
-    background-color: #121212; 
-    color: #f4f4f4; 
-}
-
-body.dark-mode header img {
-    border-color: #333;
-}
-
-body.dark-mode button {
-    background-color: #f4f4f4;
-    color: #121212;
-}
-
-body.dark-mode a {
-    color: #58a6ff; /* Um azul mais claro para o modo escuro */
-}
-
-/* ================== */
-/* ESTILOS DA NAVBAR  */
-/* ================== */
-
-.navbar {
-    position: fixed; /* A mágica para fixar no topo */
-    top: 0;
-    left: 0;
-    width: 100%; /* Ocupa toda a largura */
-    background-color: #333; /* Uma cor de fundo escura */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Uma sombra sutil */
-    z-index: 1000; /* Garante que a navbar fique acima de outros elementos */
-    display: flex;
-    justify-content: center; /* Centraliza o conteúdo da navbar */
-}
-
-.navbar ul {
-    list-style-type: none; /* Remove as bolinhas da lista */
-    margin: 0;
-    padding: 0;
-}
-
-.navbar li {
-    display: inline-block; /* Coloca os itens lado a lado */
-}
-
-.navbar a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none; /* Remove o sublinhado do link */
-    transition: background-color 0.3s; /* Animação suave no hover */
-}
-
-/* Efeito ao passar o mouse */
-.navbar a:hover {
-    background-color: #555;
-}
-
-/* ATENÇÃO: Adicione isso para o conteúdo principal não ficar escondido atrás da navbar */
-body {
-    padding-top: 50px; /* Adiciona um espaço no topo do body do tamanho da nossa navbar */
-}
-
-/* ======================== */
-/* ESTILOS DO FORMULÁRIO    */
-/* ======================== */
-
-#contato form {
-    display: flex; /* Usa flexbox para alinhar os itens */
-    flex-direction: column; /* Coloca os itens um embaixo do outro */
-    max-width: 600px; /* Limita a largura do formulário */
-    width: 100%; /* Garante que ele ocupe o espaço disponível até o máximo */
-    margin: 20px auto; /* Centraliza o formulário */
-}
-
-.form-group {
-    margin-bottom: 15px; /* Espaçamento entre os grupos de campos */
-    text-align: left; /* Alinha o texto das labels à esquerda */
-}
-
-#contato label {
-    display: block; /* Faz a label ocupar uma linha inteira */
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-#contato input,
-#contato textarea {
-    width: 100%; /* Ocupa toda a largura do container */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: inherit; /* Herda a fonte do 'body' */
-    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
-}
-
-/* Estilizando o botão de submit especificamente */
-#contato button[type="submit"] {
-    width: auto; /* Largura automática baseada no texto */
-    align-self: flex-end; /* Alinha o botão à direita */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#contato button[type="submit"]:hover {
-    background-color: #0056b3;
-    transform: scale(1.05); /* Faz o botão crescer 5% */
-}
-
-/* ================================= */
-/* ESTILOS DAS MENSAGENS DO FORM     */
-/* ================================= */
-
-.error-message {
-    color: #e74c3c; /* Um tom de vermelho */
-    font-size: 14px;
-    margin-top: 5px;
-    display: none; /* Começa escondida por padrão */
-}
-
-#success-message {
-    color: #2ecc71; /* Um tom de verde */
-    font-weight: bold;
-    margin-top: 15px;
-    display: none; /* Também começa escondida */
-}
-
-
-/* ======================== */
-/* ESTILOS DOS LINKS SOCIAIS */
-/* ======================== */
-
-/* A regra geral para os links dentro da seção social-links */
-.social-links a {
-    font-size: 18px; /* Um pouco maior para destaque */
-    font-weight: bold;
-    /* Adicionamos a transição para animar as mudanças */
-    transition: transform 0.2s ease, color 0.3s ease;
-}
-
-/* A regra para quando o mouse estiver sobre os links */
-.social-links a:hover {
-    /* Move o link 3 pixels para cima, criando um efeito de 'saltar' */
-    transform: translateY(-3px); 
-    
-    /* Podemos usar uma cor mais escura do tema para o hover */
-    color: #0056b3; 
-}
-
-/* Ajuste para o modo escuro, se quiser */
-body.dark-mode .social-links a:hover {
-    color: #8ab4f8; /* Um azul ainda mais claro para o hover no modo escuro */
-}
-
-
-/* ======================== */
-/* ESTILOS RESPONSIVOS      */
-/* ======================== */
-
-@media (max-width: 768px) {
-
-    /* Ajusta o espaçamento do topo para o header, em vez do body,
-       para evitar problemas em algumas visualizações */
-    body {
-        padding-top: 0; 
-    }
-    header {
-        margin-top: 60px; /* Garante que o header comece abaixo da navbar fixa */
-    }
-
-    h1 {
-        font-size: 2em; /* Diminui um pouco o título principal */
-    }
-
-    /* Diminui a foto em telas menores */
-    header img {
-        width: 120px;
-        height: 120px;
-    }
-
-    /* Ajusta o padding dos links do menu para caberem melhor */
-    .navbar a {
-        padding: 14px 12px;
-        font-size: 15px;
-    }
-
-    /* Garante que o conteúdo principal e o formulário não fiquem
-       colados nas bordas da tela */
-    main, #contato form {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-}
-
-
-/* ======================== */
-/* ESTILOS DA GALERIA DE PROJETOS */
-/* ======================== */
-
-.project-gallery {
-    display: flex; /* ATIVA O FLEXBOX! */
-    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
-    justify-content: center; /* Centraliza os cards no container */
-    gap: 20px; /* Cria um espaço de 20px entre os cards */
-    margin-top: 20px;
-}
-
-.project-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 20px;
-    width: 300px; /* Define uma largura fixa para cada card */
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-10px); /* Efeito de 'elevar' o card */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-}
-
-.project-card img {
-    width: 100%; /* Ocupa toda a largura do card */
-    height: 180px; /* Define uma altura fixa para todas as imagens */
-    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-.project-card h3 {
-    margin-top: 0;
-}
-
-.project-card a {
-    display: inline-block;
-    margin-top: 15px;
-    background-color: #007BFF;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.project-card a:hover {
-    background-color: #0056b3;
-}
-
-/* Ajustes para o modo escuro */
-body.dark-mode .project-card {
-    background-color: #2a2a2a;
-    border-color: #444;
-}
+.rodape { border-top: 1px solid var(--line); padding: 22px 0; color: var(--muted); font-size: .88rem; text-align: center; }
+.rodape p { margin: 0; }
