@@ -121,12 +121,23 @@ document.addEventListener('DOMContentLoaded', () => {
             // Substitua sua função fetchGitHubProjects inteira por esta
         async function fetchGitHubProjects() {
             const username = 'lgthebaldi';
-            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc`;
+            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=100`;
+            // Projetos em destaque, na ordem em que aparecem. Os demais repositórios ficam fora do portfólio.
+            const DESTAQUES = [
+                'agente-atrasos-entregas',
+                'system-design-patterns-lab',
+                'data-engineering-portfolio'
+            ];
             const galleryContainer = document.querySelector('#projetos .project-gallery');
 
             try {
                 const response = await fetch(apiUrl);
-                const projects = await response.json();
+                const todos = await response.json();
+                if (!Array.isArray(todos)) { throw new Error('Resposta inesperada da API do GitHub'); }
+
+                const projects = DESTAQUES
+                    .map(nome => todos.find(r => r.name === nome))
+                    .filter(Boolean);
 
                 galleryContainer.innerHTML = ''; 
 
@@ -161,6 +172,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     card.appendChild(title);
                     card.appendChild(description);
                     card.appendChild(link);
+
+                    // Se o repositório tiver um site (campo "Website" do GitHub), mostra o botão da demo
+                    if (project.homepage) {
+                        const demo = document.createElement('a');
+                        demo.href = project.homepage;
+                        demo.textContent = 'Ver demo';
+                        demo.target = '_blank';
+                        demo.style.marginLeft = '8px';
+                        card.appendChild(demo);
+                    }
                     
                     galleryContainer.appendChild(card);
                 });
